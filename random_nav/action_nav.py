@@ -76,17 +76,19 @@ class NavNode(Node):
 
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
-        self.get_logger().info("Received feedback: {0}".format(feedback.partial_sequence)
+        self.get_logger().info(
+            "Received feedback: {0}".format(feedback.partial_sequence))
+
 
 def main(args=None):
     rclpy.init(args=args)
-    node=NavNode(args)
+    node = NavNode(args)
     rclpy.spin(node)
     if len(sys.argv) == 3:
         node.goto_point(float(sys.argv[1]), float(sys.argv[2]))
     else:
         node.goto_point(float(sys.argv[1]), float(sys.argv[2]),
-                            float(sys.argv[3]))
+                        float(sys.argv[3]))
     node.destroy_node()
     rclpy.is_shutdown()
 
